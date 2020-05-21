@@ -16,5 +16,6 @@ train_data, train_labels = predictionSet(trainingSet, features, heuristics)
 test_data, test_labels = predictionSet(trainingSet, features, heuristics)
 
 o = OHNN()
-o.train(train_data, train_labels)
+o.load_model()
+# o.train(train_data, train_labels)
 print(o.evaluate(test_data, test_labels))

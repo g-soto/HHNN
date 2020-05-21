@@ -37,3 +37,6 @@ class OHNN:
 
     def evaluate(self, data, labels):
         return self.model.evaluate(data,  labels, verbose=2)
+
+    def load_model(self):
+        self.model = tf.keras.models.load_model('model.tf')
