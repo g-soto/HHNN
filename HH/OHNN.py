@@ -36,7 +36,11 @@ class OHNN:
             raise NoTrainedError('The network has not been trained yet')
 
     def evaluate(self, data, labels):
-        return self.model.evaluate(data,  labels, verbose=2)
+        if self.trained:
+            return self.model.evaluate(data,  labels, verbose=2)
+        else:
+            raise NoTrainedError('The network has not been trained yet')
 
     def load_model(self):
+        self.trained = True
         self.model = tf.keras.models.load_model('model.tf')

@@ -1,4 +1,4 @@
-from HERMES import ProblemSet, KP, String
+from HERMES import ProblemSet, KP
 import numpy as np
 
 def predictionSet(instances, features, heuristics):

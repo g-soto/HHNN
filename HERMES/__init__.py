@@ -10,7 +10,3 @@ KP = autoclass('mx.tec.knapsack.problem.KP')
 ProblemSet = autoclass('mx.tec.hermes.problems.ProblemSet')
 SubSet = autoclass('mx.tec.hermes.problems.ProblemSet$Subset')
 RuleBasedHH = autoclass('mx.tec.hermes.frameworks.rulebased.RuleBasedHH')
-String = autoclass('java.lang.String')
-
-
-
