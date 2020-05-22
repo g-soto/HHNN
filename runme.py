@@ -1,7 +1,7 @@
 from HERMES import KP, ProblemSet, SubSet
 
 from HH.util import predictionSet
-from HH import OHNN
+from HH import OHNN, NNHH
 
 features = ['NORM_MEAN_WEIGHT', 'NORM_MEAN_PROFIT', 'NORM_CORRELATION']
 heuristics = ["DEFAULT", "MAX_PROFIT", "MAX_PROFIT/WEIGHT", "MIN_WEIGHT"]
@@ -12,9 +12,12 @@ seed = 12345
 trainingSet = ProblemSet(setName, SubSet.TRAIN, 0.60, seed)
 testSet = ProblemSet(setName, SubSet.TEST, 0.60, seed)
 
-train_data, train_labels = predictionSet(trainingSet, features, heuristics)
-test_data, test_labels = predictionSet(trainingSet, features, heuristics)
+# train_data, train_labels = predictionSet(trainingSet, features, heuristics)
+test_data, test_labels = predictionSet(testSet, features, heuristics)
 
+# p = NNHH()
+# p = KP()
+# p.solve(trainingSet, heuristics)
 o = OHNN()
 o.load_model()
 # o.train(train_data, train_labels)
