@@ -26,9 +26,10 @@ class DBM(Mean):
 
     def update_state(self, y_true, y_pred, sample_weight=None):
         row = tf.range(0, tf.shape(y_true)[0], dtype=tf.int64)
-        col = k.argmin(y_pred)
+        col = k.argmin(y_pred, axis=1)
         pred_val = tf.gather_nd(y_true,tf.stack([row,col], axis=1))
-        values = k.abs(k.min(y_true) - pred_val)
+        values = pred_val - k.min(y_true, axis=1)
+        # tf.print(tf.gather(y_true,0), tf.gather(y_pred,0), tf.gather(pred_val,0),k.min(y_true, axis=1), values, sep='\n')
         return super(DBM, self).update_state(values, sample_weight=sample_weight)
 
 def bayesian(profits):
