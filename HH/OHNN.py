@@ -51,7 +51,7 @@ class OHNN:
             loss=lambda targets, outputs : tf.sqrt(tf.reduce_mean((targets - outputs)**2)),
             metrics=[DBM()]
               )
-        self.model.fit(data, profits, epochs=2500)
+        self.model.fit(data, profits, epochs=3000)
         self.trained = True
         self.model.save('model.tf')
 
