@@ -48,12 +48,15 @@ class OHNN:
         ])
         self.model.compile(optimizer=tf.keras.optimizers.Adam(0.01),
             #   loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-            loss=lambda targets, outputs : tf.sqrt(tf.reduce_mean((targets - outputs)**2)),
+            loss=self.loss,
             metrics=[DBM()]
               )
         self.model.fit(data, profits, epochs=3000)
         self.trained = True
         self.model.save('model.tf')
+
+    def loss(self, targets, outputs):
+        return tf.sqrt(tf.reduce_mean((targets - outputs)**2))
 
     def predict(self, data):
         if self.trained:
@@ -66,10 +69,11 @@ class OHNN:
 
     def evaluate(self, data, labels):
         if self.trained:
-            return self.model.evaluate(data,  labels, verbose=1)
+            return self.model.evaluate(data,  labels, verbose=2)
         else:
             raise NoTrainedError('The network has not been trained yet')
 
     def load_model(self):
         self.trained = True
-        self.model = tf.keras.models.load_model('model.tf')
+        self.model = tf.keras.models.load_model('model33.tf', custom_objects={'DBM':DBM(), 'loss': self.loss}, compile=False)
+        self.model.compile(optimizer=tf.keras.optimizers.Adam(0.01), loss=self.loss, metrics=[DBM()])

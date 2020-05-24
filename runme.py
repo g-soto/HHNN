@@ -19,8 +19,8 @@ test_data, test_labels, test_profits = predictionSet(testSet, features, heuristi
 
 print(bayesian(np.concatenate((train_profits, test_profits), axis=0)))
 o = OHNN()
-# o.load_model()
-o.train(train_data, train_profits)
+o.load_model()
+# o.train(train_data, train_profits)
 
 o.evaluate(test_data, test_profits)
 
