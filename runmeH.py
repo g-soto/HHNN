@@ -25,10 +25,13 @@ test_dataA, test_labelsA, test_profitsA = predictionSet(testSetA, features, heur
 test_dataB, test_labelsB, test_profitsB = predictionSet(testSetB, features, heuristics)
 
 o = OHNN()
-# o.load_model()
 
-print(bayesian(train_profits))
-o.train(train_data, train_profits)
+#comment this line...
+o.load_model()
+
+#...and uncoment this two to perfrom the trainning.
+# print(bayesian(train_profits))
+# o.train(train_data, train_profits)
 
 print(bayesian(train_profits))
 print(bayesian(test_profitsA))
