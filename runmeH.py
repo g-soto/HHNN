@@ -5,6 +5,8 @@ from HH import OHNN
 
 import numpy as np
 
+import pickle as pk
+
 features = ["NORM_MEAN_WEIGHT", "NORM_MEAN_PROFIT", "NORM_MEAN_PROFIT_WEIGHT", "NORM_MEDIAN_WEIGHT", "NORM_MEDIAN_PROFIT", "NORM_MEDIAN_PROFIT_WEIGHT", "NORM_STD_WEIGHT", "NORM_STD_PROFIT", "NORM_STD_PROFIT_WEIGHT", "NORM_CORRELATION"]
 
 heuristics = ["DEFAULT", "MAX_PROFIT", "MAX_PROFIT/WEIGHT", "MIN_WEIGHT", "MARKOVITZ"]
@@ -53,6 +55,11 @@ b = np.array(problem.solve(testSetB, [HH]).split())
 b = b.reshape(-1,2)
 
 resultsB = np.concatenate((b[1:,:],test_profitsB), axis=1)
+
+
+with open('resultA.dat','wb') as fa, open('resultB.dat','wb') as fb:
+    pk.dump(resultsA, fa)
+    pk.dump(resultsB, fb)
 
 print(resultsA)
 print(resultsB)
